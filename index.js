@@ -1,4 +1,4 @@
-console.log("Index.js running");
+//console.log("Index.js running");
 let jsonData;
 let startYear = 2009;
 let endYear = 2021;
@@ -6,7 +6,7 @@ let totalOrg;
 let myTable = document.getElementById("myTable");
 let row1 = document.getElementById("row1");
 let rowBuild = 0;
-fetch("./data.json")
+fetch("./newData.json")
     .then(response => {
         return response.json();
     })
@@ -44,15 +44,16 @@ setTimeout(() => {
     totalOrg = Object.keys(jsonData).length
     //console.log(totalOrg);
     testBuild(totalOrg);
-    console.log(typeof jsonData);
-    console.log(Object.keys(jsonData));
+    //console.log(typeof jsonData);
+    //console.log(Object.keys(jsonData));
+    console.log(jsonData);
     let currRow = 1;
     for (const [key, value] of Object.entries(jsonData)) {
         //document.getElementById("orgData").innerHTML += `${key}: ${value} <br>`;
         myTable.rows[currRow].cells[0].innerHTML = key;
         for(let i=0;i<value.length;i++){
             //introduce some formula here to solve it
-            myTable.rows[currRow].cells[value[i]-startYear].innerHTML = "Yes";
+            myTable.rows[currRow].cells[value[i]-startYear+1].innerHTML = "Yes";
         }
         currRow++;
     }

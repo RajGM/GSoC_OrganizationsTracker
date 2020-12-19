@@ -2,7 +2,7 @@ import json
 
 combinedOrg = {}
 
-for year in range(2016,2021):
+for year in range(2009,2021):
     strYear = str(year)
     f = open(strYear+'Org.txt','r')
     for x in f.readlines():
@@ -20,6 +20,6 @@ print(combinedOrg)
 
 y = json.dumps(combinedOrg)
 
-f = open("data.json","w")
+f = open("newData.json","w")
 f.write(y)
 f.close()
