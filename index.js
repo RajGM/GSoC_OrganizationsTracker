@@ -41,14 +41,15 @@ function testBuild(totalOrg){
 }
 
 setTimeout(() => {
-    totalOrg = Object.keys(jsonData).length
+    totalOrg = Object.keys(jsonData).length;
     //console.log(totalOrg);
+    const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
+    console.log(sortedObject);
     testBuild(totalOrg);
     //console.log(typeof jsonData);
     //console.log(Object.keys(jsonData));
-    console.log(jsonData);
     let currRow = 1;
-    for (const [key, value] of Object.entries(jsonData)) {
+    for (const [key, value] of Object.entries(sortedObject)) {
         //document.getElementById("orgData").innerHTML += `${key}: ${value} <br>`;
         myTable.rows[currRow].cells[0].innerHTML = key;
         for(let i=0;i<value.length;i++){
