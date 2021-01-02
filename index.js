@@ -6,8 +6,7 @@ let myTable = document.getElementById("myTable");
 let row1 = document.getElementById("row1");
 let rowBuild = 0;
 
-
-
+//build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear; i++) {
         let currCell = row1.insertCell(i);
@@ -15,6 +14,7 @@ function buildCell() {
     }
 }
 
+//build total dummay rows equal to number of organization
 function testBuild(totalOrg) {
     for (let i = 0; i < totalOrg; i++) {
         let currRow = myTable.insertRow(rowBuild + 1);
@@ -30,6 +30,7 @@ function testBuild(totalOrg) {
     }
 }
 
+//place value "Yes" in cell where appropriate
 function finalCall() {
     totalOrg = Object.keys(jsonData).length;
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
@@ -44,8 +45,6 @@ function finalCall() {
     }
 }
 
-buildCell();
-
 async function callME() {
     await fetch("./newData.json")
         .then(response => {
@@ -59,5 +58,7 @@ async function callME() {
 
     finalCall();
 }
+
+buildCell();
 
 callME();
