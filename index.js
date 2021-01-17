@@ -18,6 +18,14 @@ function buildCell() {
 function testBuild(totalOrg) {
     for (let i = 0; i < totalOrg; i++) {
         let currRow = myTable.insertRow(rowBuild + 1);
+        /*
+        if(i%2==0){
+            currRow.style.backgroundColor = "#A5EBFB";
+        }else{
+            currRow.style.backgroundColor = "#696969";
+        }
+        */
+        console.log(currRow);
         for (let j = 0; j <= endYear - startYear; j++) {
             let currCell = currRow.insertCell(j);
             if (startYear + j - 1 == "2008") {
