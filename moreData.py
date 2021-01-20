@@ -12,18 +12,19 @@ li = soup.find("section")
 for ele in li.contents[1].ul.find_all("li"):
  newdict = {
      "org":ele["aria-label"],
-     "link":"https://summerofcode.withgoogle.com"+ele.a["href"]
+     "link":"https://summerofcode.withgoogle.com"+ele.a["href"],
+     "tech":[],
+     "tools":[]
  }
  listdict.append(newdict)
  
-#print(listdict)
 for i in range(len(listdict)):
-    #print(listdict[i])
-    #print( type(listdict[i]) )
-    #print( listdict[i]["org"] )
-    listdict[i]["org"] = listdict[i]["year"] = "2016"
-    #print( listdict[i] )
-    #print(type(listdict[i]))
-    #for x in listdict[i]:
-     #print(type(x))
-     #x["year"] = "2016"
+ newdata = urllib.request.urlopen(listdict[i]["link"]).read()
+ newsoup = BeautifulSoup(newdata,'html.parser')
+ for tech in newsoup.body.find_all("li",{"class":"organization__tag organization__tag--technology"}): 
+  listdict[i]["tech"].append(tech.text)
+
+ for tool in newsoup.body.find_all("li",{"class":"organization__tag organization__tag--topic"}): 
+  listdict[i]["tools"].append(tool.text)
+
+print(listdict)
