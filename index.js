@@ -34,6 +34,7 @@ function testBuild(totalOrg) {
 //place value "Yes" in cell where appropriate
 function finalCall() {
     totalOrg = Object.keys(jsonData).length;
+    //const sortedObject = Object.keys(jsonData).sort();
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
     testBuild(totalOrg);
     let currRow = 1;
@@ -51,8 +52,10 @@ function finalCall() {
     }
 }
 
+//allDataCombined
+//allfinalData
 async function callME() {
-    await fetch("./allDataCombined852.json")
+    await fetch("./allDataCombined.json")
         .then(response => {
             return response.json();
         })

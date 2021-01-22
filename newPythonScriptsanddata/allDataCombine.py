@@ -11,14 +11,12 @@ for year in range(2009,2016):
     f = open("./yearlyData/"+strYear+'Org.txt','r')
     for x in f.readlines():
         #x = x[0:len(x)-1]
-        if x.lower() in str(combinedOrg.keys()).lower():
+        if x in combinedOrg.keys():
             combinedOrg[x]["years"].append(strYear)
         else:
             combinedOrg[x] = {"years":[strYear]}
             
     f.close()  
-
-print(combinedOrg)
 
 y = json.dumps(combinedOrg)
 
