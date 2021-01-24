@@ -5,8 +5,7 @@ let totalOrg;
 let myTable = document.getElementById("myTable");
 let row1 = document.getElementById("row1");
 let rowBuild = 0;
-let activeCol = [];
-
+let activeCol = {};
 //build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {
@@ -44,15 +43,43 @@ function testBuild(totalOrg) {
 
 function changeData(e) {
     console.log(e.target);
-    console.log(e.target.cellIndex);
-    console.log(e.target.parentNode.rowIndex);
-    console.log(Object.keys(jsonData)[e.target.parentNode.rowIndex-1]);
+    let targetRow = e.target.parentNode.rowIndex;
+    let targetCol = e.target.cellIndex;
+    let orgName = Object.keys(jsonData)[e.target.parentNode.rowIndex-1];
+    let activeColcell = activeCol[orgName];
+    console.log("Row:"+targetRow);
+    console.log("Column:"+targetCol);
+    console.log("OrgName:"+orgName);
+    myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor","white");
+    activeCol[orgName]=targetCol;
+    
+
+/*
+    var parsedInt = parseInt(value.years[i]);
+            if (parsedInt >= 2016) {
+                if(value.years.length == i+1){
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor","green");
+                }
+                myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
+                myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = value[value.years[i]].topics;
+                myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">Link</a>";
+            } else {
+                if(value.years.length == i+1){
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor","blue");
+                }
+                myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = "--";
+                myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = "--";
+                myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "--"
+            }
+*/
+
+
+
 }
 
 //place value "Yes" in cell where appropriate
 function finalCall() {
     totalOrg = Object.keys(jsonData).length;
-    console.log("Total Organization:" + totalOrg);
     activeCol = new Array(totalOrg);
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
     testBuild(totalOrg);
@@ -63,23 +90,27 @@ function finalCall() {
         for (let i = 0; i < value.years.length; i++) {
             myTable.rows[currRow].cells[value.years[i] - startYear + 1].innerHTML = "Yes";
             var parsedInt = parseInt(value.years[i]);
-            if (parsedInt >= 2016) {
-                if(value.years.length == i+1){
-                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor","red");
+            if(value.years.length == i+1){
+                activeCol[key]=value.years[i]-startYear+1;
+                if (parsedInt >= 2016) {
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor","green");
+                    myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
+                    myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = value[value.years[i]].topics;
+                    myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">Link</a>";
+                } else {
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor","blue");
+                    myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = "--";
+                    myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = "--";
+                    myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "--"
                 }
-                myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
-                myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = value[value.years[i]].topics;
-                myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">Link</a>";
-            } else {
-                myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = "--";
-                myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = "--";
-                myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "--"
             }
+            
         }
         currRow++;
     }
     jsonData = sortedObject;
-}
+    //console.log(activeCol);
+    }
 
 async function callME() {
     await fetch("./allDataCombined.json")
