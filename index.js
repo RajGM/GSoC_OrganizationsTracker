@@ -6,6 +6,7 @@ let myTable = document.getElementById("myTable");
 let row1 = document.getElementById("row1");
 let rowBuild = 0;
 let activeCol = {};
+let activeState = {};
 //build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {
@@ -42,30 +43,51 @@ function testBuild(totalOrg) {
 }
 
 function changeData(e) {
-    console.log(jsonData);
     let targetRow = e.target.parentNode.rowIndex;
     let targetCol = e.target.cellIndex;
     let orgName = Object.keys(jsonData)[e.target.parentNode.rowIndex - 1];
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
+    
     myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", "white");
     activeCol[orgName] = targetCol;
-    
+
     if (orgYear >= 2016 && jsonData[orgName][orgYear]) {
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "green");
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = jsonData[orgName][orgYear].topics;
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">Link</a>";
+        if(activeState[orgName]){
+            myTable.rows[targetRow].cells[targetCol].innerHTML = orgYear;
+            activeState[orgName] = false;
+        }else{
+            myTable.rows[targetRow].cells[targetCol].innerHTML = "Yes";
+            activeState[orgName] = true;
+        }
     } else if(jsonData[orgName]["years"].includes(orgYear.toString())){
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "blue");
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
+        if(activeState[orgName]){
+            myTable.rows[targetRow].cells[targetCol].innerHTML = orgYear;
+            activeState[orgName] = false;
+        }else{
+            myTable.rows[targetRow].cells[targetCol].innerHTML = "Yes";
+            activeState[orgName] = true;
+        }
     }else{
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "red");
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
+        if(activeState[orgName]){
+            myTable.rows[targetRow].cells[targetCol].innerHTML = orgYear;
+            activeState[orgName] = false;
+        }else{
+            myTable.rows[targetRow].cells[targetCol].innerHTML = "No";
+            activeState[orgName] = true;
+        }
     }
 
 }
@@ -73,7 +95,6 @@ function changeData(e) {
 //place value "Yes" in cell where appropriate
 function finalCall() {
     totalOrg = Object.keys(jsonData).length;
-    activeCol = new Array(totalOrg);
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
     testBuild(totalOrg);
     let currRow = 1;
@@ -85,6 +106,7 @@ function finalCall() {
             var parsedInt = parseInt(value.years[i]);
             if (value.years.length == i + 1) {
                 activeCol[key] = value.years[i] - startYear + 1;
+                activeState[key] = true;
                 if (parsedInt >= 2016) {
                     myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", "green");
                     myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
