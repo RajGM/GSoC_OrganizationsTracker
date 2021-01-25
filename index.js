@@ -10,7 +10,7 @@ let activeState = {};
 let currentActiveColor = "yellow";
 let participatedAndNoInfoColor = "blue";
 let participatedAndInfoColor = "green";
-let norParticipatedColor = "red";
+let notParticipatedColor = "red";
 //some clashed happened
 //build dummy 0th row
 function buildCell() {
@@ -37,7 +37,7 @@ function testBuild(totalOrg) {
                 currCell.innerHTML = "Organization";
             } else if (j >= 1 && j <= endYear - startYear) {
                 currCell.innerHTML = "No";
-                currCell.setAttribute("bgcolor",norParticipatedColor);
+                currCell.setAttribute("bgcolor",notParticipatedColor);
                 currCell.addEventListener('click', changeData);
             } else {
                 currCell.innerHTML = " ";
@@ -82,7 +82,7 @@ function changeData(e) {
             activeState[orgName] = true;
         }
     }else{
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", norParticipatedColor);
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", notParticipatedColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
