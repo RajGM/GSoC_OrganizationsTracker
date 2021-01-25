@@ -43,16 +43,11 @@ function testBuild(totalOrg) {
 
 function changeData(e) {
     console.log(jsonData);
-    console.log(e.target);
     let targetRow = e.target.parentNode.rowIndex;
     let targetCol = e.target.cellIndex;
     let orgName = Object.keys(jsonData)[e.target.parentNode.rowIndex - 1];
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
-    console.log("Row:" + targetRow);
-    console.log("Column:" + targetCol);
-    console.log("OrgName:" + orgName);
-    console.log("Year:" + orgYear);
     myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", "white");
     activeCol[orgName] = targetCol;
     
@@ -61,7 +56,7 @@ function changeData(e) {
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = jsonData[orgName][orgYear].topics;
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">Link</a>";
-    } else if(jsonData[orgName]["years"].includes(orgYear)){
+    } else if(jsonData[orgName]["years"].includes(orgYear.toString())){
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "blue");
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
