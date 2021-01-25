@@ -7,6 +7,10 @@ let row1 = document.getElementById("row1");
 let rowBuild = 0;
 let activeCol = {};
 let activeState = {};
+let currentActiveColor = "yellow";
+let participatedAndNoInfoColor = "blue";
+let participatedAndInfoColor = "green";
+let norParticipatedColor = "red";
 //build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {
@@ -32,7 +36,7 @@ function testBuild(totalOrg) {
                 currCell.innerHTML = "Organization";
             } else if (j >= 1 && j <= endYear - startYear) {
                 currCell.innerHTML = "No";
-                //myTable.rows[currRow].cells[value.years[i] - startYear + 1].addEventListener('click',changeData);
+                currCell.setAttribute("bgcolor",norParticipatedColor);
                 currCell.addEventListener('click', changeData);
             } else {
                 currCell.innerHTML = " ";
@@ -53,7 +57,7 @@ function changeData(e) {
     activeCol[orgName] = targetCol;
 
     if (orgYear >= 2016 && jsonData[orgName][orgYear]) {
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "green");
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", participatedAndInfoColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = jsonData[orgName][orgYear].topics;
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">Link</a>";
@@ -65,7 +69,7 @@ function changeData(e) {
             activeState[orgName] = true;
         }
     } else if(jsonData[orgName]["years"].includes(orgYear.toString())){
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "blue");
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", participatedAndNoInfoColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
@@ -77,7 +81,7 @@ function changeData(e) {
             activeState[orgName] = true;
         }
     }else{
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", "red");
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", norParticipatedColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
@@ -104,16 +108,22 @@ function finalCall() {
         for (let i = 0; i < value.years.length; i++) {
             myTable.rows[currRow].cells[value.years[i] - startYear + 1].innerHTML = "Yes";
             var parsedInt = parseInt(value.years[i]);
+            if(parsedInt>=2016){
+                myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor",participatedAndInfoColor);
+            }else{
+                myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor",participatedAndNoInfoColor);    
+            }
+
             if (value.years.length == i + 1) {
                 activeCol[key] = value.years[i] - startYear + 1;
                 activeState[key] = true;
                 if (parsedInt >= 2016) {
-                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", "green");
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", currentActiveColor);
                     myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
                     myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = value[value.years[i]].topics;
                     myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">Link</a>";
                 } else {
-                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", "blue");
+                    myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", currentActiveColor);
                     myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = "--";
                     myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = "--";
                     myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "--"
