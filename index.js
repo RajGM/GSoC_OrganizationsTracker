@@ -11,6 +11,7 @@ let currentActiveColor = "yellow";
 let participatedAndNoInfoColor = "blue";
 let participatedAndInfoColor = "green";
 let norParticipatedColor = "red";
+//some clashed happened
 //build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {
