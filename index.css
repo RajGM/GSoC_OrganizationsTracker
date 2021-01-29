@@ -1,4 +1,5 @@
 .col{
+    width: 100%;
     display: block;
 }
 
@@ -7,6 +8,10 @@
     display: block;
 }
 
-#col2{
-    display: block;
-}
+.btn-group.special {
+    display: flex;
+  }
+  
+  .special .btn {
+    flex: 1
+  }
