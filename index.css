@@ -15,3 +15,11 @@
   .special .btn {
     flex: 1
   }
+
+  #yearForm{
+    max-width: 70px;
+  }
+
+  #goButton{
+    margin-left: 20px;
+  }

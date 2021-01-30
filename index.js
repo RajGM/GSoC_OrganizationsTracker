@@ -11,7 +11,14 @@ let currentActiveColor = "yellow";
 let participatedAndNoInfoColor = "blue";
 let participatedAndInfoColor = "green";
 let notParticipatedColor = "red";
-//some clashed happened
+let yearOpt1 = document.getElementById("yearOpt1");
+
+//it's working
+yearOpt1.onclick = function (){
+    window.alert("Welcome bro");
+    console.log("Alert Bro");
+};
+
 //build dummy 0th row
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {

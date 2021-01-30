@@ -43,30 +43,64 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <a class="nav-link dropdown-item" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Participated
-            </a>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Participated</a>
+            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              <a id="yearOptions" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                Years
+                Details
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">At least</a></li>
-                <li><a class="dropdown-item" href="#">At most</a></li>
+                <li><a class="dropdown-item" href="#" id="yearOpt1">At least</a></li>
+                <li><a class="dropdown-item" href="#" id="yearOpt2">At most</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Equal to</a></li>
+                <li><a class="dropdown-item" href="#" id="yearOpt3">Equal to</a></li>
               </ul>
-            </li>  
+            </li>
+            <a>
+              <input id="yearForm" class="form-control me-2" type="search" placeholder="Years" aria-label="Search">
+            </a>
+            <li class="nav-item dropdown">
+              <a id="andOr1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                AND/OR
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a id="andOrOpt1" class="dropdown-item" href="#">AND</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a id="andOrOpt2" class="dropdown-item" href="#">OR</a></li>
+              </ul>
+            </li>
+            <a>
+              <input id="toolForm" class="form-control me-2" type="search" placeholder="Tool1 AND Tool2 OR T3" aria-label="Search">
+            </a>
+            <li class="nav-item dropdown">
+              <a id="andOrFinal" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                AND/OR
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a id="andOrFinalOpt1" class="dropdown-item" href="#">AND</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a id="andOrFinalOpt2" class="dropdown-item" href="#">OR</a></li>
+              </ul>
+            </li>
+            <a>
+              <input id="topicForm" class="form-control me-2" type="search" placeholder="Topic AND Topic2 OR ..." aria-label="Search">
+            </a>
+
+            <button id="goButton" class="btn btn-outline-success" type="submit">Go</button>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          
         </div>
+
       </div>
     </nav>
 
