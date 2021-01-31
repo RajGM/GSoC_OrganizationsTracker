@@ -44,7 +44,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Participated</a>
+              <a class="nav-link active" aria-current="page">Participated</a>
             </li>
             <li class="nav-item dropdown">
               <a id="yearOptions" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -61,7 +61,7 @@
               </ul>
             </li>
             <a>
-              <input id="yearForm" class="form-control me-2" type="search" placeholder="Years" aria-label="Search">
+              <input id="yearForm" type="number" class="form-control me-2" placeholder="Years" aria-label="Search">
             </a>
             <li class="nav-item dropdown">
               <a id="andOr1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -77,7 +77,7 @@
               </ul>
             </li>
             <a>
-              <input id="toolForm" class="form-control me-2" type="search" placeholder="Tool1 AND Tool2 OR T3" aria-label="Search">
+              <input id="toolForm" class="form-control me-2" type="search" placeholder="ToolName" aria-label="Search">
             </a>
             <li class="nav-item dropdown">
               <a id="andOrFinal" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -93,7 +93,7 @@
               </ul>
             </li>
             <a>
-              <input id="topicForm" class="form-control me-2" type="search" placeholder="Topic AND Topic2 OR ..." aria-label="Search">
+              <input id="topicForm" class="form-control me-2" type="search" placeholder="Topic Name" aria-label="Search">
             </a>
 
             <button id="goButton" class="btn btn-outline-success" type="submit">Go</button>
@@ -118,7 +118,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
+  <script type="module" src="allVar.js"></script>
   <script src="index.js"></script>
+  <script src="searchBox.js"></script>
 </body>
 
 </html>
