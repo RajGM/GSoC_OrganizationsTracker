@@ -11,141 +11,125 @@ let currentActiveColor = "yellow";
 let participatedAndNoInfoColor = "blue";
 let participatedAndInfoColor = "green";
 let notParticipatedColor = "red";
-
-
-
-
-
-
+let errorCase;
 
 
 
 let yearOptions = document.getElementById("yearOptions");
 let yearOpt1 = document.getElementById("yearOpt1");
-let yearOpt12 = document.getElementById("yearOpt2");
+let yearOpt2 = document.getElementById("yearOpt2");
 let yearOpt3 = document.getElementById("yearOpt3");
 let yearForm = document.getElementById("yearForm");
-let andOr1 = document.getElementById("andOr1");
-let andOrOpt1 = document.getElementById("andOrOpt1");
-let andOrOpt2 = document.getElementById("andOrOpt2");
-let toolForm = document.getElementById("toolForm");
-let andOrFinal = document.getElementById("andOrFinal");
-let andOrFinalOpt1 = document.getElementById("andOrFinalOpt1");
-let andOrFinalOpt2 = document.getElementById("andOrFinalOpt2");
+let techForm = document.getElementById("techForm");
 let topicForm = document.getElementById("topicForm");
-let goButton = document.getElementById("goButton");
-let Query = {
-    YearQ: "At least",
-    Years: "0",
-    andOr1: "OR",
-    Tool: "",
-    andOr2: "OR",
-    Topic: "",
-    /*
-    Tool:{
-        OR:[],
-        AND:[]
-    },
-    Topic:{
-        OR:[],
-        AND:[]
-    }
-    */
-}
+let messageForm = document.getElementById("messageForm");
+let yearButton = document.getElementById("yearButton");
+let techButton = document.getElementById("techButton");
+let topicButton = document.getElementById("topicButton");
+let modifiedData = [];
 
 yearOpt1.onclick = function () {
     yearOptions.innerHTML = yearOpt1.innerHTML;
-    Query.YearQ = "at least"
 }
 
 yearOpt2.onclick = function () {
     yearOptions.innerHTML = yearOpt2.innerHTML;
-    Query.YearQ = "at most"
 }
 
 yearOpt3.onclick = function () {
     yearOptions.innerHTML = yearOpt3.innerHTML;
-    Query.YearQ = "equal"
 }
 
 yearForm.onchange = function () {
     Query.Years = yearForm.value;
 }
 
-andOrOpt1.onclick = function () {
-    andOr1.innerHTML = andOrOpt1.innerHTML;
-    Query.andOr1 = andOrOpt1.innerHTML;
-}
+yearButton.onclick = function () {
+    let yearVal = parseInt(yearForm.value);
+    if (yearOptions.innerHTML.toLowerCase() == "details") {
+        //exit case
+        console.log("error called");
+        errorCase = yearOptions;
+        yearOptions.style.border = "5px solid red";
+    } else if (yearVal == 0) {
+        //exit case
+        console.log("Year form error");
+        errorCase = yearForm;
+        yearForm.style.border = "5px solid red";
+    } else {
+        console.log("all true case");
 
-andOrOpt2.onclick = function () {
-    andOr1.innerHTML = andOrOpt2.innerHTML;
-    Query.andOr1 = andOrOpt2.innerHTML;
-}
+        if (yearOptions.innerHTML.toLowerCase() == "at least") {
 
-andOrFinalOpt1.onclick = function () {
-    andOrFinal.innerHTML = andOrFinalOpt1.innerHTML;
-    Query.andOr2 = andOrFinalOpt1.innerHTML;
-}
-
-andOrFinalOpt2.onclick = function () {
-    andOrFinal.innerHTML = andOrFinalOpt2.innerHTML;
-    Query.andOr2 = andOrFinalOpt2.innerHTML;
-}
-
-goButton.onclick = function () {
-    console.log(yearForm.value);
-    console.log(toolForm.value);
-    console.log(topicForm.value);
-    console.log(Query);
-    console.log("Go button clicked");
-    //do  a query search here
-
-    for (const [key, value] of Object.entries(jsonData)) {
-        if (value.years.length > 4) {
-            for (let i = 0; i < value.years.length; i++) {
-                if (value.years[i] >= 2016) {
-                    if (value[value.years[i]]["li"] !== "undefined") {
-                        console.log(value[value.years[i]].tech);
-                    }
+            for (const [key, value] of Object.entries(jsonData)) {
+                if (value.years.length >= Query.Years) {
+                    modifiedData.append(key);
                 }
-
             }
+
+        }
+        else if (yearOptions.innerHTML.toLowerCase() == "at most") {
+
+            for (const [key, value] of Object.entries(jsonData)) {
+                if (value.years.length <= Query.Years) {
+                    modifiedData.append(key);
+                }
+            }
+
+        } else if (yearOptions.innerHTML.toLowerCase() == "equal to") {
+
+            for (const [key, value] of Object.entries(jsonData)) {
+                if (value.years.length == Query.Years) {
+                    modifiedData.append(key);
+                }
+            }
+
         }
 
     }
 
-
 }
 
-console.log(Query);
+techButton.onclick = function () {
+    if (techForm.value == "") {
+        //exit case
+        console.log("Enter value");
+        errorCase = techForm;
+        techForm.style.border = "5px solid red";
+    } else {
+        for (const [key, value] of Object.entries(jsonData)) {
+            for (let i = 0; i < value.years.length; i++) {
+                if (parseInt(value.years[i]) >= 2016) {
+                    if (value[value.years[i]].tech.includes(techForm.value)) {
+                        //modifiedData.append(key);
+                        console.log(key);
+                    }
+                }
+            }
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+topicButton.onclick = function () {
+    console.log(jsonData);
+    if (topicForm.value == "") {
+        //exit case
+        console.log("Enter value");
+        errorCase = topicForm;
+        topicForm.style.border = "5px solid red";
+    } else {
+        for (const [key, value] of Object.entries(jsonData)) {
+            for (let i = 0; i < value.years.length; i++) {
+                if (parseInt(value.years[i]) >= 2016) {
+                    if (value[value.years[i]].topics.includes(topicForm.value)) {
+                        //modifiedData.append(key);
+                        console.log(key);
+                    }
+                }
+            }
+        }
+    }
+}
 
 //build dummy 0th row
 function buildCell() {

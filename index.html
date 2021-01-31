@@ -21,9 +21,9 @@
 
     <div class="btn-group special" role="group" aria-label="...">
       <button class="btn btn-default btn-warning me-2">Currently Active</button>
-      <button class="btn btn-default btn-success me-2">Participated and Tools + Topics Data are
+      <button class="btn btn-default btn-success me-2">Participated and Tech + Topics Data are
         available</button>
-      <button class="btn btn-default btn-primary me-2">Participated and Tools + Topics Data are not
+      <button class="btn btn-default btn-primary me-2">Participated and Tech + Topics Data are not
         available</button>
       <button class="btn btn-default btn-danger me-2">Not Participated</button>
     </div>
@@ -32,11 +32,9 @@
 
   <div class="col">
 
-
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Filter Bar</a>
+        <a class="navbar-brand" href="#">Query Bar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -48,9 +46,7 @@
             </li>
             <li class="nav-item dropdown">
               <a id="yearOptions" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Details
-              </a>
+                aria-expanded="false">Details</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#" id="yearOpt1">At least</a></li>
                 <li><a class="dropdown-item" href="#" id="yearOpt2">At most</a></li>
@@ -61,49 +57,29 @@
               </ul>
             </li>
             <a>
-              <input id="yearForm" type="number" class="form-control me-2" placeholder="Years" aria-label="Search">
+              <input id="yearForm" type="number" value="0" class="form-control me-2" aria-label="Search">
             </a>
-            <li class="nav-item dropdown">
-              <a id="andOr1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                AND/OR
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a id="andOrOpt1" class="dropdown-item" href="#">AND</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a id="andOrOpt2" class="dropdown-item" href="#">OR</a></li>
-              </ul>
-            </li>
+            <button id="yearButton" class="btn btn-outline-success" type="submit">Year Search</button>
             <a>
-              <input id="toolForm" class="form-control me-2" type="search" placeholder="ToolName" aria-label="Search">
+              <input id="techForm" class="form-control me-2" type="search" placeholder="TechName" aria-label="Search">
             </a>
-            <li class="nav-item dropdown">
-              <a id="andOrFinal" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                AND/OR
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a id="andOrFinalOpt1" class="dropdown-item" href="#">AND</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a id="andOrFinalOpt2" class="dropdown-item" href="#">OR</a></li>
-              </ul>
-            </li>
+            <button id="techButton" class="btn btn-outline-success" type="submit">Tech Search</button>
             <a>
               <input id="topicForm" class="form-control me-2" type="search" placeholder="Topic Name" aria-label="Search">
             </a>
 
-            <button id="goButton" class="btn btn-outline-success" type="submit">Go</button>
+            <button id="topicButton" class="btn btn-outline-success" type="submit">Topic Search</button>
+
+            <a>
+              <input id="messageForm" class="form-control me-2" type="search" placeholder="Query Code" readonly aria-label="Search">
+            </a>
+
           </ul>
           
         </div>
 
       </div>
     </nav>
-
 
   </div>
 
