@@ -26,7 +26,9 @@ let messageForm = document.getElementById("messageForm");
 let yearButton = document.getElementById("yearButton");
 let techButton = document.getElementById("techButton");
 let topicButton = document.getElementById("topicButton");
-let modifiedData = [];
+let tempData = {
+
+};
 
 yearOpt1.onclick = function () {
     yearOptions.innerHTML = yearOpt1.innerHTML;
@@ -41,8 +43,9 @@ yearOpt3.onclick = function () {
 }
 
 yearForm.onchange = function () {
-    Query.Years = yearForm.value;
+    //Query.Years = yearForm.value;
 }
+
 
 yearButton.onclick = function () {
     let yearVal = parseInt(yearForm.value);
@@ -51,38 +54,40 @@ yearButton.onclick = function () {
         console.log("error called");
         errorCase = yearOptions;
         yearOptions.style.border = "5px solid red";
-    } else if (yearVal == 0) {
-        //exit case
-        console.log("Year form error");
+    }else if(yearVal<0){
         errorCase = yearForm;
         yearForm.style.border = "5px solid red";
     } else {
-        console.log("all true case");
 
         if (yearOptions.innerHTML.toLowerCase() == "at least") {
 
             for (const [key, value] of Object.entries(jsonData)) {
-                if (value.years.length >= Query.Years) {
-                    modifiedData.append(key);
+                if (value.years.length >= yearVal) {
+                    tempData[key] = value;
                 }
             }
-
+            deleteTable();
+            rebuildTable(tempData);
         }
         else if (yearOptions.innerHTML.toLowerCase() == "at most") {
 
             for (const [key, value] of Object.entries(jsonData)) {
-                if (value.years.length <= Query.Years) {
-                    modifiedData.append(key);
+                if (value.years.length <= yearVal) {
+                    tempData[key] = value;
                 }
             }
+            deleteTable();
+            rebuildTable(tempData);
 
         } else if (yearOptions.innerHTML.toLowerCase() == "equal to") {
 
             for (const [key, value] of Object.entries(jsonData)) {
-                if (value.years.length == Query.Years) {
-                    modifiedData.append(key);
+                if (value.years.length == yearVal) {
+                    tempData[key] = value;
                 }
             }
+            deleteTable();
+            rebuildTable(tempData);
 
         }
 
@@ -101,12 +106,15 @@ techButton.onclick = function () {
             for (let i = 0; i < value.years.length; i++) {
                 if (parseInt(value.years[i]) >= 2016) {
                     if (value[value.years[i]].tech.includes(techForm.value)) {
-                        //modifiedData.append(key);
-                        console.log(key);
+                        tempData[key]=value;
                     }
                 }
             }
         }
+
+        deleteTable();
+        rebuildTable(tempData);
+
     }
 }
 
@@ -122,13 +130,29 @@ topicButton.onclick = function () {
             for (let i = 0; i < value.years.length; i++) {
                 if (parseInt(value.years[i]) >= 2016) {
                     if (value[value.years[i]].topics.includes(topicForm.value)) {
-                        //modifiedData.append(key);
-                        console.log(key);
+                        tempData[key]=value;
                     }
                 }
             }
         }
+
+        deleteTable();
+        rebuildTable(tempData);
+
+
     }
+}
+
+function deleteTable() {
+
+    for (let i = 0; i < totalOrg; i++) {
+        myTable.deleteRow(1);
+    }
+}
+
+function rebuildTable(tempData) {
+    rowBuild = 0;
+    finalCall(tempData);
 }
 
 //build dummy 0th row
@@ -217,7 +241,7 @@ function changeData(e) {
 }
 
 //place value "Yes" in cell where appropriate
-function finalCall() {
+function finalCall(jsonData) {
     totalOrg = Object.keys(jsonData).length;
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
     testBuild(totalOrg);
@@ -267,7 +291,7 @@ async function callME() {
             }
         );
 
-    finalCall();
+    finalCall(jsonData);
 }
 
 buildCell();
