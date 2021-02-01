@@ -1,41 +1,48 @@
-.col{
-    width: 100%;
-    display: block;
+.col {
+  width: 100%;
+  display: block;
 }
 
-#col1{
-    text-align: center;
-    display: block;
+#col1 {
+  text-align: center;
+  display: block;
 }
 
 .btn-group.special {
-    display: flex;
-  }
-  
-  .special .btn {
-    flex: 1
-  }
+  display: flex;
+}
 
-  #yearForm{
-    max-width: 70px;
-  }
+.special .btn {
+  flex: 1
+}
 
-  #goButton{
-    margin-left: 20px;
-  }
+#yearForm {
+  max-width: 70px;
+}
 
-  #messageForm{
-    margin-left: 10px;
-  }
+#yearButton {
+  margin-right: 4px;
+}
 
-  #yearButton{
-    margin-right: 4px;
-  }
+#techForm {
+  margin-left: 4px;
+}
 
-  #techButton{
-    margin-right: 4px;
-  }
+#techButton {
+  margin-left: 10px;
+  margin-right: 4px;
+}
 
-  #topicButton{
-    margin-right: 4px;
-  }
+#topicForm {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+#topicButton {
+  margin-left: 10px;
+}
+
+#messageForm {
+  margin-left: 8px;
+  width: 800px;
+}

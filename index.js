@@ -26,9 +26,38 @@ let messageForm = document.getElementById("messageForm");
 let yearButton = document.getElementById("yearButton");
 let techButton = document.getElementById("techButton");
 let topicButton = document.getElementById("topicButton");
-let tempData = {
+let selectDataset1 = document.getElementById("selectDataset1");
+let selectDataset2 = document.getElementById("selectDataset2");
+let resetAllButton = document.getElementById("resetAllButton");
+let tempData = {};
+let selectedDataSet = 0;
 
-};
+selectDataset1.onclick = function () {
+    selectedDataSet = 0;
+    selectDataset1.innerHTML = "Original Dataset Selected";
+
+    if (!selectDataset2.disabled) {
+        selectDataset2.innerHTML = "Select Filtered Dataset";
+    }
+
+    console.log(jsonData);
+}
+
+selectDataset2.onclick = function () {
+    selectedDataSet = 1;
+    selectDataset1.innerHTML = "Select Original Dataset";
+    selectDataset2.innerHTML = "Filtered Dataset Selected";
+    console.log(tempData);
+}
+
+resetAllButton.onclick = function () {
+    yearOptions.innerHTML = "Details";
+    yearForm.value = 0;
+    techForm.value = "";
+    techForm.placeholder = "Tech Name";
+    topicForm.value = "";
+    topicForm.placeholder = "Topic Name";
+}
 
 yearOpt1.onclick = function () {
     yearOptions.innerHTML = yearOpt1.innerHTML;
@@ -42,36 +71,49 @@ yearOpt3.onclick = function () {
     yearOptions.innerHTML = yearOpt3.innerHTML;
 }
 
-yearForm.onchange = function () {
-    //Query.Years = yearForm.value;
-}
-
-
 yearButton.onclick = function () {
+
+    if (errorCase) {
+        errorCase.style.border = "none";
+        messageForm.value = "";
+    }
+
+    let useDataset;
+    if (selectedDataSet == 0) {
+        useDataset = jsonData;
+    } else {
+        useDataset = tempData;
+    }
+
     let yearVal = parseInt(yearForm.value);
     if (yearOptions.innerHTML.toLowerCase() == "details") {
         //exit case
+        messageForm.value = "Please select something in deatils";
         console.log("error called");
         errorCase = yearOptions;
         yearOptions.style.border = "5px solid red";
-    }else if(yearVal<0){
+    } else if (yearVal < 0) {
+        messageForm.value = "Please enter valid number in year from";
         errorCase = yearForm;
         yearForm.style.border = "5px solid red";
     } else {
 
+        tempData = {};
+
         if (yearOptions.innerHTML.toLowerCase() == "at least") {
 
-            for (const [key, value] of Object.entries(jsonData)) {
+            for (const [key, value] of Object.entries(useDataset)) {
                 if (value.years.length >= yearVal) {
                     tempData[key] = value;
                 }
             }
+
             deleteTable();
             rebuildTable(tempData);
         }
         else if (yearOptions.innerHTML.toLowerCase() == "at most") {
 
-            for (const [key, value] of Object.entries(jsonData)) {
+            for (const [key, value] of Object.entries(useDataset)) {
                 if (value.years.length <= yearVal) {
                     tempData[key] = value;
                 }
@@ -81,7 +123,7 @@ yearButton.onclick = function () {
 
         } else if (yearOptions.innerHTML.toLowerCase() == "equal to") {
 
-            for (const [key, value] of Object.entries(jsonData)) {
+            for (const [key, value] of Object.entries(useDataset)) {
                 if (value.years.length == yearVal) {
                     tempData[key] = value;
                 }
@@ -93,20 +135,44 @@ yearButton.onclick = function () {
 
     }
 
+    if (selectDataset2.disabled) {
+        selectDataset2.disabled = false;
+        console.log("Enabled");
+        console.log(selectDataset2.disabled);
+    }
+
+    messageForm.value = "Yearly Query Completed and Table Updated";
+
 }
 
 techButton.onclick = function () {
+
+    if (errorCase) {
+        errorCase.style.border = "none";
+        messageForm.value = "";
+    }
+
+    let useDataset;
+    if (selectedDataSet == 0) {
+        useDataset = jsonData;
+    } else {
+        useDataset = tempData;
+    }
+
     if (techForm.value == "") {
         //exit case
+        messageForm.value = "Enter some technology name in tech from";
         console.log("Enter value");
         errorCase = techForm;
         techForm.style.border = "5px solid red";
     } else {
-        for (const [key, value] of Object.entries(jsonData)) {
+        tempData = {};
+
+        for (const [key, value] of Object.entries(useDataset)) {
             for (let i = 0; i < value.years.length; i++) {
                 if (parseInt(value.years[i]) >= 2016) {
                     if (value[value.years[i]].tech.includes(techForm.value)) {
-                        tempData[key]=value;
+                        tempData[key] = value;
                     }
                 }
             }
@@ -116,21 +182,46 @@ techButton.onclick = function () {
         rebuildTable(tempData);
 
     }
+
+
+    if (selectDataset2.disabled) {
+        selectDataset2.disabled = false;
+        console.log("Enabled");
+        console.log(selectDataset2.disabled);
+    }
+
+
+    messageForm.value = "Tech Query Completed and Table Updated";
 }
 
 topicButton.onclick = function () {
-    console.log(jsonData);
+
+    if (errorCase) {
+        errorCase.style.border = "none";
+        messageForm.value = "";
+    }
+
+    let useDataset;
+    if (selectedDataSet == 0) {
+        useDataset = jsonData;
+    } else {
+        useDataset = tempData;
+    }
+
     if (topicForm.value == "") {
         //exit case
+        messageForm.value = "Enter some topic in topic from";
         console.log("Enter value");
         errorCase = topicForm;
         topicForm.style.border = "5px solid red";
     } else {
-        for (const [key, value] of Object.entries(jsonData)) {
+        tempData = {};
+
+        for (const [key, value] of Object.entries(useDataset)) {
             for (let i = 0; i < value.years.length; i++) {
                 if (parseInt(value.years[i]) >= 2016) {
                     if (value[value.years[i]].topics.includes(topicForm.value)) {
-                        tempData[key]=value;
+                        tempData[key] = value;
                     }
                 }
             }
@@ -141,6 +232,15 @@ topicButton.onclick = function () {
 
 
     }
+
+    if (selectDataset2.disabled) {
+        selectDataset2.disabled = false;
+        console.log(selectDataset2.disabled);
+    }
+
+
+    messageForm.value = "Topic Query Completed and Table Updated";
+
 }
 
 function deleteTable() {
