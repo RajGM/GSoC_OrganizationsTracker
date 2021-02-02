@@ -51,12 +51,14 @@ selectDataset2.onclick = function () {
 }
 
 resetAllButton.onclick = function () {
+    selectedDataSet = 0;
     yearOptions.innerHTML = "Details";
     yearForm.value = 0;
     techForm.value = "";
     techForm.placeholder = "Tech Name";
     topicForm.value = "";
     topicForm.placeholder = "Topic Name";
+    selectDataset2.disabled = true;
 }
 
 yearOpt1.onclick = function () {
@@ -291,17 +293,47 @@ function testBuild(totalOrg) {
 }
 
 function changeData(e) {
+    let useDataset;
+    if (selectedDataSet == 0) {
+        useDataset = jsonData;
+    } else {
+        useDataset = tempData;
+    }
+    
+    const sortedObject = Object.fromEntries(Object.entries(useDataset).sort());
+    console.log(useDataset);
+    console.log(sortedObject);
+
     let targetRow = e.target.parentNode.rowIndex;
     let targetCol = e.target.cellIndex;
-    let orgName = Object.keys(jsonData)[e.target.parentNode.rowIndex - 1];
+    let orgName = Object.keys(sortedObject)[targetRow-1];
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
+    console.log(targetRow);
+    console.log(targetCol);
+    console.log(orgName);
+    console.log(activeColcell);
+    console.log(orgYear);
 
-    myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", "white");
+    //do casing here
+    if(startYear+activeColcell-1>=2016){
+        if(useDataset[orgName][startYear+activeColcell-1]){
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndInfoColor);        
+        }else{
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", notParticipatedColor);
+        }
+    }else{
+        if(useDataset[orgName]["years"].includes( (startYear+activeColcell-1).toString() )){
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndNoInfoColor);        
+        }else{
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", notParticipatedColor);
+        }
+    }   
+
     activeCol[orgName] = targetCol;
-
+    
     if (orgYear >= 2016 && jsonData[orgName][orgYear]) {
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", participatedAndInfoColor);
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", currentActiveColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = jsonData[orgName][orgYear].topics;
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">Link</a>";
@@ -313,7 +345,7 @@ function changeData(e) {
             activeState[orgName] = true;
         }
     } else if (jsonData[orgName]["years"].includes(orgYear.toString())) {
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", participatedAndNoInfoColor);
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", currentActiveColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
@@ -325,7 +357,7 @@ function changeData(e) {
             activeState[orgName] = true;
         }
     } else {
-        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", notParticipatedColor);
+        myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", currentActiveColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = "--";
         myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "--";
@@ -344,6 +376,7 @@ function changeData(e) {
 function finalCall(jsonData) {
     totalOrg = Object.keys(jsonData).length;
     const sortedObject = Object.fromEntries(Object.entries(jsonData).sort());
+    jsonData = sortedObject;
     testBuild(totalOrg);
     let currRow = 1;
     for (const [key, value] of Object.entries(sortedObject)) {
@@ -377,7 +410,6 @@ function finalCall(jsonData) {
         }
         currRow++;
     }
-    jsonData = sortedObject;
 }
 
 async function callME() {
