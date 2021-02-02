@@ -37,6 +37,10 @@ selectDataset1.onclick = function () {
 
     if (!selectDataset2.disabled) {
         selectDataset2.innerHTML = "Select Filtered Dataset";
+        selectDataset2.classList.remove("btn-warning");
+        selectDataset2.classList.add("btn-success");
+        selectDataset1.classList.add("btn-warning");
+        selectDataset1.classList.remove("btn-success");
     }
 
     console.log(jsonData);
@@ -46,7 +50,10 @@ selectDataset2.onclick = function () {
     selectedDataSet = 1;
     selectDataset1.innerHTML = "Select Original Dataset";
     selectDataset2.innerHTML = "Filtered Dataset Selected";
-    console.log(tempData);
+    selectDataset1.classList.remove("btn-warning");
+    selectDataset1.classList.add("btn-success");
+    selectDataset2.classList.add("btn-warning");
+    selectDataset2.classList.remove("btn-success");
 }
 
 resetAllButton.onclick = function () {
@@ -294,32 +301,32 @@ function changeData(e) {
     } else {
         useDataset = tempData;
     }
-    
+
     const sortedObject = Object.fromEntries(Object.entries(useDataset).sort());
-    
+
     let targetRow = e.target.parentNode.rowIndex;
     let targetCol = e.target.cellIndex;
-    let orgName = Object.keys(sortedObject)[targetRow-1];
+    let orgName = Object.keys(sortedObject)[targetRow - 1];
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
-    
+
     //do casing here
-    if(startYear+activeColcell-1>=2016){
-        if(useDataset[orgName][startYear+activeColcell-1]){
-            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndInfoColor);        
-        }else{
+    if (startYear + activeColcell - 1 >= 2016) {
+        if (useDataset[orgName][startYear + activeColcell - 1]) {
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndInfoColor);
+        } else {
             myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", notParticipatedColor);
         }
-    }else{
-        if(useDataset[orgName]["years"].includes( (startYear+activeColcell-1).toString() )){
-            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndNoInfoColor);        
-        }else{
+    } else {
+        if (useDataset[orgName]["years"].includes((startYear + activeColcell - 1).toString())) {
+            myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndNoInfoColor);
+        } else {
             myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", notParticipatedColor);
         }
-    }   
+    }
 
     activeCol[orgName] = targetCol;
-    
+
     if (orgYear >= 2016 && jsonData[orgName][orgYear]) {
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", currentActiveColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
