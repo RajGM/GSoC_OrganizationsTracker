@@ -14,7 +14,6 @@ let notParticipatedColor = "red";
 let errorCase;
 
 
-
 let yearOptions = document.getElementById("yearOptions");
 let yearOpt1 = document.getElementById("yearOpt1");
 let yearOpt2 = document.getElementById("yearOpt2");
@@ -162,7 +161,6 @@ techButton.onclick = function () {
     }
 
     if (techForm.value == "") {
-        //exit case
         messageForm.value = "Enter some technology name in tech from";
         console.log("Enter value");
         errorCase = techForm;
@@ -232,7 +230,6 @@ topicButton.onclick = function () {
         deleteTable();
         rebuildTable(tempData);
 
-
     }
 
     if (selectDataset2.disabled) {
@@ -240,13 +237,11 @@ topicButton.onclick = function () {
         console.log(selectDataset2.disabled);
     }
 
-
     messageForm.value = "Topic Query Completed and Table Updated";
 
 }
 
 function deleteTable() {
-
     for (let i = 0; i < totalOrg; i++) {
         myTable.deleteRow(1);
     }
@@ -301,20 +296,13 @@ function changeData(e) {
     }
     
     const sortedObject = Object.fromEntries(Object.entries(useDataset).sort());
-    console.log(useDataset);
-    console.log(sortedObject);
-
+    
     let targetRow = e.target.parentNode.rowIndex;
     let targetCol = e.target.cellIndex;
     let orgName = Object.keys(sortedObject)[targetRow-1];
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
-    console.log(targetRow);
-    console.log(targetCol);
-    console.log(orgName);
-    console.log(activeColcell);
-    console.log(orgYear);
-
+    
     //do casing here
     if(startYear+activeColcell-1>=2016){
         if(useDataset[orgName][startYear+activeColcell-1]){
