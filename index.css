@@ -17,6 +17,7 @@
 }
 
 #yearForm {
+  min-width: 100px;
   max-width: 70px;
 }
 
@@ -26,6 +27,7 @@
 }
 
 #techForm {
+  min-width: 100px;
   margin-left: 4px;
 }
 
@@ -35,6 +37,7 @@
 }
 
 #topicForm {
+  min-width: 100px;
   margin-left: 4px;
   margin-right: 4px;
 }
