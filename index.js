@@ -13,7 +13,6 @@ let participatedAndInfoColor = "green";
 let notParticipatedColor = "red";
 let errorCase;
 
-
 let yearOptions = document.getElementById("yearOptions");
 let yearOpt1 = document.getElementById("yearOpt1");
 let yearOpt2 = document.getElementById("yearOpt2");
@@ -284,6 +283,7 @@ function testBuild(totalOrg) {
                 currCell.innerHTML = "Organization";
             } else if (j >= 1 && j <= endYear - startYear) {
                 currCell.innerHTML = "No";
+                currCell.classList.add("pointerClass");
                 currCell.setAttribute("bgcolor", notParticipatedColor);
                 currCell.addEventListener('click', changeData);
             } else {
