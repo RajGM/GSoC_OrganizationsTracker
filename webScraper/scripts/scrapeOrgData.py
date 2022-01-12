@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import re
 import urllib.request
+import json
+combinedOrg = {}
 
 def gather2015Data():
  for year in range(2009,2016):
@@ -37,5 +39,24 @@ def gather2020Data():
    f.write(li.text+"\n")  
   f.close()
 
+def combineOrgData():
+ for year in range(2009,2021):
+     strYear = str(year)
+     f = open(strYear+'Org.txt','r')
+     for x in f.readlines():
+         if x in combinedOrg.keys():
+             combinedOrg[x].append(strYear)
+         else:
+             combinedOrg[x] = list()
+             combinedOrg[x].append(strYear)
+     f.close()  
+
+ y = json.dumps(combinedOrg)
+
+ f = open("orgData.json","w")
+ f.write(y)
+ f.close()
+
 gather2015Data()
 gather2020Data()
+combineOrgData()
