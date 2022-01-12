@@ -2,13 +2,13 @@ import json
 
 combinedOrg = {}
 
-f = open('allfinalData.json',"r")
+f = open('../scrapedData/combineData/allfinalData.json',"r")
 combinedOrg = json.load(f)
 f.close()
 
 for year in range(2009,2016):
     strYear = str(year)
-    f = open("./yearlyData/"+strYear+'Org.txt','r')
+    f = open("../scrapedData/yearlyData/"+strYear+'Org.txt','r')
     for x in f.readlines():
         if x in combinedOrg.keys():
             combinedOrg[x]["years"].append(strYear)
