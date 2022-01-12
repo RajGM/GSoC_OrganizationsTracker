@@ -15,6 +15,4 @@ for li in soup.find_all('a'):
  print(li.text+"\n")
 f.close()
 
-
 f.close()
-

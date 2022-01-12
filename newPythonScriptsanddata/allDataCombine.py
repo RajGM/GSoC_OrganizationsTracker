@@ -10,7 +10,6 @@ for year in range(2009,2016):
     strYear = str(year)
     f = open("./yearlyData/"+strYear+'Org.txt','r')
     for x in f.readlines():
-        #x = x[0:len(x)-1]
         if x in combinedOrg.keys():
             combinedOrg[x]["years"].append(strYear)
         else:

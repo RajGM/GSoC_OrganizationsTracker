@@ -7,7 +7,6 @@ singleYearData = {}
 
 for year in range(2016,2021):
  strYear = str(year)
- print(strYear+"Started")
  data = urllib.request.urlopen('https://summerofcode.withgoogle.com/archive/'+strYear+'/organizations/').read()
  soup = BeautifulSoup(data,'html.parser')
  
@@ -44,11 +43,8 @@ for year in range(2016,2021):
    }
    singleYearData[ele["aria-label"]] = newdict
  
- print(strYear+"Done")
-
+ 
 jsonData = json.dumps(singleYearData)
-print(jsonData)
-print("2016-2020 Done")
 
 f = open('allfinalData.json','w')
 f.write(jsonData)

@@ -29,7 +29,6 @@ for year in range(2016,2021):
   for tool in newsoup.body.find_all("li",{"class":"organization__tag organization__tag--topic"}): 
    listdict[i]["topics"].append(tool.text)
 
- print(strYear+"Done")
  y = json.dumps(listdict)
  f = open(strYear+'toolsData.json','w')
  f.write(y)
