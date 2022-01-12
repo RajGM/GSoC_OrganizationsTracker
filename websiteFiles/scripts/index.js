@@ -42,7 +42,6 @@ selectDataset1.onclick = function () {
         selectDataset1.classList.remove("btn-success");
     }
 
-    console.log(jsonData);
 }
 
 selectDataset2.onclick = function () {
@@ -96,7 +95,6 @@ yearButton.onclick = function () {
     if (yearOptions.innerHTML.toLowerCase() == "details") {
         //exit case
         messageForm.value = "Please select something in deatils";
-        console.log("error called");
         errorCase = yearOptions;
         yearOptions.style.border = "5px solid red";
     } else if (yearVal < 0) {
@@ -144,8 +142,6 @@ yearButton.onclick = function () {
 
     if (selectDataset2.disabled) {
         selectDataset2.disabled = false;
-        console.log("Enabled");
-        console.log(selectDataset2.disabled);
     }
 
     messageForm.value = "Yearly Query Completed and Table Updated";
@@ -168,7 +164,6 @@ techButton.onclick = function () {
 
     if (techForm.value == "") {
         messageForm.value = "Enter some technology name in tech from";
-        console.log("Enter value");
         errorCase = techForm;
         techForm.style.border = "5px solid red";
     } else {
@@ -192,8 +187,6 @@ techButton.onclick = function () {
 
     if (selectDataset2.disabled) {
         selectDataset2.disabled = false;
-        console.log("Enabled");
-        console.log(selectDataset2.disabled);
     }
 
 
@@ -215,9 +208,7 @@ topicButton.onclick = function () {
     }
 
     if (topicForm.value == "") {
-        //exit case
         messageForm.value = "Enter some topic in topic from";
-        console.log("Enter value");
         errorCase = topicForm;
         topicForm.style.border = "5px solid red";
     } else {
@@ -240,7 +231,6 @@ topicButton.onclick = function () {
 
     if (selectDataset2.disabled) {
         selectDataset2.disabled = false;
-        console.log(selectDataset2.disabled);
     }
 
     messageForm.value = "Topic Query Completed and Table Updated";
@@ -310,7 +300,6 @@ function changeData(e) {
     let activeColcell = activeCol[orgName];
     let orgYear = startYear + targetCol - 1;
 
-    //do casing here
     if (startYear + activeColcell - 1 >= 2016) {
         if (useDataset[orgName][startYear + activeColcell - 1]) {
             myTable.rows[targetRow].cells[activeColcell].setAttribute("bgcolor", participatedAndInfoColor);
@@ -408,7 +397,7 @@ function finalCall(jsonData) {
 }
 
 async function callME() {
-    await fetch("./allDataCombined.json")
+    await fetch("./websiteFiles/assets/data/allDataCombined.json")
         .then(response => {
             return response.json();
         })
