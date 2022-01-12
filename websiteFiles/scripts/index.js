@@ -321,7 +321,7 @@ function changeData(e) {
         myTable.rows[targetRow].cells[targetCol].setAttribute("bgcolor", currentActiveColor);
         myTable.rows[targetRow].cells[endYear - startYear + 1].innerHTML = jsonData[orgName][orgYear].tech;
         myTable.rows[targetRow].cells[endYear - startYear + 2].innerHTML = jsonData[orgName][orgYear].topics;
-        myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">Link</a>";
+        myTable.rows[targetRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + jsonData[orgName][orgYear].link + ">"+orgYear+"</a>";
         if (activeState[orgName]) {
             myTable.rows[targetRow].cells[targetCol].innerHTML = orgYear;
             activeState[orgName] = false;
@@ -383,7 +383,7 @@ function finalCall(jsonData) {
                     myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", currentActiveColor);
                     myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = value[value.years[i]].tech;
                     myTable.rows[currRow].cells[endYear - startYear + 2].innerHTML = value[value.years[i]].topics;
-                    myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">Link</a>";
+                    myTable.rows[currRow].cells[endYear - startYear + 3].innerHTML = "<a href=" + value[value.years[i]].link + ">"+value.years[i]+"</a>";
                 } else {
                     myTable.rows[currRow].cells[value.years[i] - startYear + 1].setAttribute("bgcolor", currentActiveColor);
                     myTable.rows[currRow].cells[endYear - startYear + 1].innerHTML = "--";
