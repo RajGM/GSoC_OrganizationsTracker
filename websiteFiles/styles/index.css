@@ -1,0 +1,56 @@
+.col {
+  width: 100%;
+  display: block;
+}
+
+#col1 {
+  text-align: center;
+  display: block;
+}
+
+.btn-group.special {
+  display: flex;
+}
+
+.special .btn {
+  flex: 1
+}
+
+#yearForm {
+  min-width: 100px;
+  max-width: 70px;
+}
+
+#yearButton {
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+#techForm {
+  min-width: 100px;
+  margin-left: 4px;
+}
+
+#techButton {
+  margin-left: 10px;
+  margin-right: 4px;
+}
+
+#topicForm {
+  min-width: 100px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+#topicButton {
+  margin-left: 10px;
+}
+
+#messageForm {
+  margin-left: 8px;
+  width: 700px;
+}
+
+.pointerClass{
+  cursor: pointer;
+}
