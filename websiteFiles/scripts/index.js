@@ -63,6 +63,8 @@ resetAllButton.onclick = function () {
     topicForm.value = "";
     topicForm.placeholder = "Topic Name";
     selectDataset2.disabled = true;
+    deleteTable();
+    rebuildTable(jsonData);
 }
 
 yearOpt1.onclick = function () {
@@ -93,7 +95,6 @@ yearButton.onclick = function () {
 
     let yearVal = parseInt(yearForm.value);
     if (yearOptions.innerHTML.toLowerCase() == "details") {
-        //exit case
         messageForm.value = "Please select something in deatils";
         errorCase = yearOptions;
         yearOptions.style.border = "5px solid red";
