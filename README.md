@@ -24,7 +24,6 @@ Quick start available option:
 - Clone the repo: `https://github.com/RajGM/GSoC_OrganizationsTracker.git`
 - Run index.html on local machine for the preview
 
-
 ## What's included
 Within the download you'll find the following directories and files.
 

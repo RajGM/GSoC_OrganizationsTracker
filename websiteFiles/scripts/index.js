@@ -238,18 +238,20 @@ topicButton.onclick = function () {
 
 }
 
+//function to delete the table
 function deleteTable() {
     for (let i = 0; i < totalOrg; i++) {
         myTable.deleteRow(1);
     }
 }
 
+//function to rebuild the table
 function rebuildTable(tempData) {
     rowBuild = 0;
     finalCall(tempData);
 }
 
-//build dummy 0th row
+//build dummy 0th row with metaData
 function buildCell() {
     for (let i = 1; i <= endYear - startYear + 3; i++) {
         let currCell = row1.insertCell(i);
@@ -285,6 +287,7 @@ function testBuild(totalOrg) {
     }
 }
 
+//change data in cell according to the click on the year cell
 function changeData(e) {
     let useDataset;
     if (selectedDataSet == 0) {
@@ -397,7 +400,9 @@ function finalCall(jsonData) {
     }
 }
 
+//function to fill the table with data
 async function callME() {
+    await buildCell();
     await fetch("./websiteFiles/assets/data/allDataCombined.json")
         .then(response => {
             return response.json();
@@ -410,7 +415,5 @@ async function callME() {
 
     finalCall(jsonData);
 }
-
-buildCell();
 
 callME();
