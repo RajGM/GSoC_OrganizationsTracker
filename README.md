@@ -82,6 +82,20 @@ GSOC_OrganizationTracker/
 ├── README.md
 ```
 
+## Json Schema
+``` text
+
+Object
+├── OrganizationName (Object)
+│   ├── Year (Object)
+│   |   ├──  Link (Object)
+│   |   |   ├── Tech (Array)
+│   |   |   ├── Topics (Array)
+│   ├── Years (Array)     
+
+
+```
+
 ## TechStack
 This section list frameworks, libraries used to build this project 
 
