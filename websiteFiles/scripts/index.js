@@ -1,3 +1,4 @@
+//Variables declaration
 let jsonData;
 let startYear = 2009;
 let endYear = 2021;
@@ -29,6 +30,9 @@ let selectDataset2 = document.getElementById("selectDataset2");
 let resetAllButton = document.getElementById("resetAllButton");
 let tempData = {};
 let selectedDataSet = 0;
+
+
+//onClick functionality of buttons 
 
 selectDataset1.onclick = function () {
     selectedDataSet = 0;
@@ -78,6 +82,8 @@ yearOpt2.onclick = function () {
 yearOpt3.onclick = function () {
     yearOptions.innerHTML = yearOpt3.innerHTML;
 }
+
+//onClick functionality of filter buttons 
 
 yearButton.onclick = function () {
 
