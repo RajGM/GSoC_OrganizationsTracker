@@ -24,6 +24,17 @@ Quick start available option:
 - Clone the repo: `https://github.com/RajGM/GSoC_OrganizationsTracker.git`
 - Run index.html on local machine for the preview
 
+### To scrape Data
+- Run these commands with python
+- Run scrapeOrgData.py to collect name of the organization year wise from the website
+- Run scrapeToolsTechLinkData.py to collection information about tools, topic and more about each organization from the website
+- Run allDataCombine.py to combine all of the data into single json file 
+- OR
+- pip install beautifulsoup4
+- python3 scrapeOrgData.py
+- python3 scrapeToolsTechLinkData.py
+- python3 allDataCombine.py
+
 ## What's included
 Within the download you'll find the following directories and files.
 

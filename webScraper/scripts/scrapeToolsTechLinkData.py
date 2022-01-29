@@ -43,7 +43,6 @@ for year in range(2016,2021):
    }
    singleYearData[ele["aria-label"]] = newdict
  
- 
 jsonData = json.dumps(singleYearData)
 
 f = open('allfinalData.json','w')
