@@ -84,7 +84,6 @@ GSOC_OrganizationTracker/
 
 ## Json Schema
 ``` text
-
 Object
 ├── OrganizationName (Object)
 │   ├── Year (Object)
@@ -92,8 +91,6 @@ Object
 │   |   |   ├── Tech (Array)
 │   |   |   ├── Topics (Array)
 │   ├── Years (Array)     
-
-
 ```
 
 ## TechStack
